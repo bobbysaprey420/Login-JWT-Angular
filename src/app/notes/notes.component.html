@@ -1,0 +1,69 @@
+
+<button class="back btn btn-warning" (click)="redirectBack()">Back</button>
+<h4>Notes Data</h4>
+<table class="table table-bordered table-striped table-hover">
+    <thead>
+        <tr>
+            <th class="text-center">Lecture ID</th>
+            <th class="text-center">Notes ID</th>
+            <th class="text-center">Notes Name</th>
+            <th class="text-center">Notes Link</th>
+            <th class="text-center">Priority</th>
+            <th class="text-center">Hide</th>
+            <th class="text-center">Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let n of notes">
+            <td>{{ n.lecture_id }}</td>
+            <td>{{ n.notes_id }}</td>
+            <td>{{ n.notes_name }}</td>
+            <td>{{ n.notes_link }}</td>
+            <td>{{ n.priority }}</td>
+            <td>{{ n.hide }}</td>
+
+            <td>
+                <button class="btn btn-info mr-2" (click)="showEditNotesForm(n)">
+                    <i class="fa fa-edit"></i>
+                </button>
+                <button class="btn btn-danger" (click)="removeNotes(n)">
+                    <i class="fa fa-minus"></i>
+                </button>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+<button class="btn btn-success" (click)="showAddNotesForm()"><i class="fa fa-plus"></i></button>
+<br />
+<br />
+
+<form *ngIf="editForm"  #myform2 = "ngForm" (ngSubmit) = "updateNotes(myform2)">
+    <h2>Edit Notes Details</h2>
+    <p>Lecture ID <input type="text" name="lecture_id" ngModel="{{editNotes.lecture_id}}"  readonly/></p>
+    <p>Notes ID <input type="text" name="notes_id" ngModel="{{editNotes.notes_id}}" readonly/></p>
+    <p>Notes Name <input type="text" name="notes_name" ngModel="{{editNotes.notes_name}}" /></p>
+    <p>Notes Link <input type="text" name="notes_link" ngModel="{{editNotes.notes_link}}" /></p>
+    <p>Priority <input type="text" name="priority" ngModel="{{editNotes.priority}}" /></p>
+    <p>Hide <input type="text" name="hide" ngModel="{{editNotes.hide}}" /></p>
+
+    <p>
+        <button type="submit" class="btn btn-primary mr-2">Submit</button>
+        <button type="button" class="btn btn-warning" (click)="cancelEdits()">Cancel</button>
+    </p>
+</form>
+
+<form *ngIf="newNotesForm" #myform = "ngForm" (ngSubmit) = "saveNotes(myform)">
+    <h2>Add New Course</h2>
+    <p>Lecture ID <input type="text" name="lecture_id" ngModel="{{lecture_id}}"  readonly/></p>
+    <p>Notes Name <input type="text" name="notes_name" ngModel required/></p>
+    <p>Notes Link <input type="text" name="notes_link" ngModel/></p>
+    <p>Priority <input type="text" name="priority" ngModel/></p>
+    <p>Hide <input type="text" name="hide" ngModel/></p>
+
+    <p>
+        <button type="submit" class="btn btn-primary mr-2">Submit</button>
+        <button type="button" class="btn btn-warning" (click)="cancelNewNotes()">Cancel</button>
+    </p>
+</form>
+

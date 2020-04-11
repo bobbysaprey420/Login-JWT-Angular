@@ -1,0 +1,78 @@
+
+<button class="back btn btn-warning" (click)="redirectBack()">Back</button>
+<h4>Lecture Data</h4>
+<table class="table table-bordered table-striped table-hover">
+    <thead>
+        <tr>
+            <th class="text-center">Course ID</th>
+            <th class="text-center">Subject ID</th>
+            <th class="text-center">Lecture ID</th>
+            <th class="text-center">Lecture Name</th>
+            <th class="text-center">Video Link</th>
+            <th class="text-center">Description</th>
+            <th class="text-center">Priority</th>
+            <th class="text-center">Hide</th>
+            <th class="text-center">Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let l of lecture">
+            <td>{{ l.course_id }}</td>
+            <td>{{ l.subject_id }}</td>
+            <td>{{ l.lecture_id }}</td>
+            <td>{{ l.lecture_name }}</td>
+            <td>{{ l.video_link }}</td>
+            <td>{{ l.description }}</td>
+            <td>{{ l.priority }}</td>
+            <td>{{ l.hide }}</td>
+
+            <td>
+                <button class="btn btn-info mr-2" (click)="showEditLectureForm(l)">
+                    <i class="fa fa-edit"></i>
+                </button>
+                <button class="btn btn-danger" (click)="removeLecture(l)">
+                    <i class="fa fa-minus"></i>
+                </button>
+                <a class="btn btn-warning lecture_btn" [routerLink] = "['/course', l.course_id, 'subject', l.subject_id, 'lecture', l.lecture_id, 'notes']">View Notes</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+<button class="btn btn-success" (click)="showAddLectureForm()"><i class="fa fa-plus"></i></button>
+<br />
+<br />
+
+<form *ngIf="editForm"  #myform2 = "ngForm" (ngSubmit) = "updateLecture(myform2)">
+    <h2>Edit Lecture Details</h2>
+    <p>Course ID <input type="text" name="course_id" ngModel="{{editLecture.course_id}}"  readonly/></p>
+    <p>Subject ID <input type="text" name="subject_id" ngModel="{{editLecture.subject_id}}"  readonly/></p>
+    <p>Lecture ID <input type="text" name="lecture_id" ngModel="{{editLecture.lecture_id}}" readonly/></p>
+    <p>Lecture Name <input type="text" name="lecture_name" ngModel="{{editLecture.lecture_name}}" /></p>
+    <p>Description <input type="text" name="description" ngModel="{{editLecture.description}}" /></p>
+    <p>Video Link <input type="text" name="video_link" ngModel="{{editLecture.video_link}}" /></p>
+    <p>Priority <input type="text" name="priority" ngModel="{{editLecture.priority}}" /></p>
+    <p>Hide <input type="text" name="hide" ngModel="{{editLecture.hide}}" /></p>
+
+    <p>
+        <button type="submit" class="btn btn-primary mr-2">Submit</button>
+        <button type="button" class="btn btn-warning" (click)="cancelEdits()">Cancel</button>
+    </p>
+</form>
+
+<form *ngIf="newLectureForm" #myform = "ngForm" (ngSubmit) = "saveLecture(myform)">
+    <h2>Add New Course</h2>
+    <p>Course ID <input type="text" name="course_id" ngModel="{{course_id}}"  readonly/></p>
+    <p>Subject ID <input type="text" name="subject_id" ngModel="{{subject_id}}"  readonly/></p>
+    <p>Lecture Name <input type="text" name="lecture_name" ngModel required/></p>
+    <p>Description <input type="text" name="description" ngModel/></p>
+    <p>Video Link <input type="text" name="video_link" ngModel/></p>
+    <p>Priority <input type="text" name="priority" ngModel/></p>
+    <p>Hide <input type="text" name="hide" ngModel/></p>
+
+    <p>
+        <button type="submit" class="btn btn-primary mr-2">Submit</button>
+        <button type="button" class="btn btn-warning" (click)="cancelNewLecture()">Cancel</button>
+    </p>
+</form>
+

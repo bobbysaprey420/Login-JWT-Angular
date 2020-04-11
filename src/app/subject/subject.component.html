@@ -1,0 +1,70 @@
+<button class="back btn btn-warning" (click)="redirectBack()">Back</button>
+<h4>Subject Data</h4>
+<table class="table table-bordered table-striped table-hover">
+    <thead>
+        <tr>
+            <th class="text-center">Course ID</th>
+            <th class="text-center">Subject ID</th>
+            <th class="text-center">Subject Name</th>
+            <th class="text-center">Description</th>
+            <th class="text-center">Priority</th>
+            <th class="text-center">Hide</th>
+            <th class="text-center">Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let s of subject">
+            <td>{{ s.course_id }}</td>
+            <td>{{ s.subject_id }}</td>
+            <td>{{ s.subject_name }}</td>
+            <td>{{ s.description }}</td>
+            <td>{{ s.priority }}</td>
+            <td>{{ s.hide }}</td>
+
+            <td>
+                <button class="btn btn-info mr-2" (click)="showEditSubjectForm(s)">
+                    <i class="fa fa-edit"></i>
+                </button>
+                <button class="btn btn-danger" (click)="removeSubject(s)">
+                    <i class="fa fa-minus"></i>
+                </button>
+                <a class="btn btn-warning subject_btn"  [routerLink] = "['/course', s.course_id, 'subject', s.subject_id, 'lecture']" >View Lectures</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+<button class="btn btn-success" (click)="showAddSubjectForm()"><i class="fa fa-plus"></i></button>
+<br />
+<br />
+
+<form *ngIf="editForm"  #myform2 = "ngForm" (ngSubmit) = "updateSubject(myform2)">
+    <h2>Edit Subject Details</h2>
+    <p>Course ID <input type="text" name="course_id" ngModel="{{editSubject.course_id}}"  readonly/></p>
+    <p>Subject ID <input type="text" name="subject_id" ngModel="{{editSubject.subject_id}}" readonly/></p>
+    <p>Subject Name <input type="text" name="subject_name" ngModel="{{editSubject.subject_name}}" /></p>
+    <p>Description <input type="text" name="description" ngModel="{{editSubject.description}}" /></p>
+    <p>Priority <input type="text" name="priority" ngModel="{{editSubject.priority}}" /></p>
+    <p>Hide <input type="text" name="hide" ngModel="{{editSubject.hide}}" /></p>
+
+    <p>
+        <button type="submit" class="btn btn-primary mr-2">Submit</button>
+        <button type="button" class="btn btn-warning" (click)="cancelEdits()">Cancel</button>
+    </p>
+</form>
+
+<form *ngIf="newSubjectForm" #myform = "ngForm" (ngSubmit) = "saveSubject(myform)">
+    <h2>Add New Course</h2>
+    <p>Course ID <input type="text" name="course_id" ngModel="{{course_id}}" readonly/></p>
+    <p>Subject Name <input type="text" name="subject_name" required ngModel/></p>
+    <p>Description <input type="text" name="description" ngModel/></p>
+    <p>Priority <input type="text" name="priority" ngModel/></p>
+    <p>Hide <input type="text" name="hide" ngModel/></p>
+
+    <p>
+        
+        <button type="submit" class="btn btn-primary mr-2">Submit</button>
+        <button type="button" class="btn btn-warning" (click)="cancelNewSubject()">Cancel</button>
+    </p>
+</form>
+
