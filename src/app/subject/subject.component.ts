@@ -4,6 +4,7 @@ import { Subject } from '../models/subject';
 import { ActivatedRoute, Router } from '@angular/router';
 import {NgForm} from '@angular/forms';
 import { from } from 'rxjs';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-subject',
@@ -19,7 +20,7 @@ export class SubjectComponent implements OnInit {
   newSubjectForm: Boolean;
   course_id: String;
 
-  constructor(private router : Router, private subjectService : SubjectService, private route: ActivatedRoute) {
+  constructor(private router : Router, private subjectService : SubjectService, private route: ActivatedRoute, private toastr: ToastrService) {
     this.course_id = this.route.snapshot.paramMap.get('id');
    }
 
@@ -49,19 +50,55 @@ export class SubjectComponent implements OnInit {
   }
 
   saveSubject(form: NgForm) {
-    console.log(form.value)
-    this.subjectService.newSubject(this.newSubject);
-    this.newSubjectForm = false;
+    this.subjectService.newSubject(form.value, this.course_id).subscribe(data => {
+      if(data.status == 200){
+        this.newSubjectForm = false;
+        this.newSubject = null;
+        this.toastr.success('Success', 'Inserted a new entry', { timeOut: 3000 });
+        this.ngOnInit();
+      }
+      else{
+        console.log("Following Error - ");
+        console.log(data.body);
+        this.toastr.error('Error Occured', 'See browsers console for error message', { timeOut: 3000 });
+      }
+    });
   }
 
   updateSubject(form: NgForm) {
-    console.log(form.value)
-    this.subjectService.updateSubject(this.editSubject);
-    this.editForm = false;
+    var subject_id = form.value.subject_id;
+    this.subjectService.updateSubject(form.value, subject_id).subscribe(data => {
+      if(data.status == 200){
+        this.editForm = false;
+        this.editSubject = null;
+        this.toastr.success('Success', 'Subject table updated', { timeOut: 3000 });
+        this.ngOnInit();
+      }
+      else{
+        console.log("Following Error - ");
+        console.log(data.body);
+        this.toastr.error('Error Occured', 'See browsers console for error message', { timeOut: 3000 });
+      }
+    });
   }
 
-  removeSubject(Subject : Subject) {
-    this.subjectService.deleteSubject(Subject);
+  removeSubject(subject : Subject) {
+    if (confirm('Are you sure you want to delete this data from the database?')) {
+      var subject_id = subject.subject_id;
+      this.subjectService.deleteSubject(subject_id).subscribe(data => {
+        if(data.status == 200){
+          this.cancelEdits();
+          this.cancelNewSubject();
+          this.toastr.success('Success', 'Subject Deleted', { timeOut: 3000 });
+          this.ngOnInit();
+        }
+        else{
+          console.log("Following Error - ");
+          console.log(data.body);
+          this.toastr.error('Error Occured', 'See browsers console for error message', { timeOut: 3000 });
+        }
+      });
+    }
   }
 
   cancelEdits() {

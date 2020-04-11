@@ -15,7 +15,6 @@ export class CourseComponent implements OnInit {
   course: Course[];
   editCourse: Course;
   editForm: Boolean;
-  newCourse: Course;
   newCourseForm: Boolean;
 
   constructor(private http: HttpClient, private courseService : CourseService, private toastr: ToastrService) { }
@@ -23,7 +22,6 @@ export class CourseComponent implements OnInit {
   ngOnInit() {
     this.editForm = false;
     this.newCourseForm = false;
-    this.newCourse = null;
     this.editCourse = null;
     this.getCourses();
   }
@@ -37,7 +35,6 @@ export class CourseComponent implements OnInit {
   showEditCourseForm(course : Course) {
     this.editForm = true;
     this.editCourse = course;
-    this.newCourse = null;
     this.newCourseForm = false;
   }
 
@@ -52,10 +49,13 @@ export class CourseComponent implements OnInit {
     this.courseService.newCourse(form.value).subscribe(data => {
       if(data.status == 200){
         this.newCourseForm = false;
-        this.newCourse = null;
+        this.toastr.success('Success', 'Inserted a new entry', { timeOut: 3000 });
+        this.ngOnInit();
       }
       else{
-
+        console.log("Following Error - ");
+        console.log(data.body);
+        this.toastr.error('Error Occured', 'See browsers console for error message', { timeOut: 3000 });
       }
     });
   }
@@ -67,16 +67,34 @@ export class CourseComponent implements OnInit {
       if(data.status == 200){
         this.editForm = false;
         this.editCourse = null;
-        this.toastr.success('Hello world!', 'Toastr fun!');
+        this.toastr.success('Success', 'Course table updated', { timeOut: 3000 });
+        this.ngOnInit();
       }
       else{
-
+        console.log("Following Error - ");
+        console.log(data.body);
+        this.toastr.error('Error Occured', 'See browsers console for error message', { timeOut: 3000 });
       }
     });
   }
 
   removeCourse(course : Course) {
-    this.courseService.deleteCourse(course);
+    if (confirm('Are you sure you want to delete this data from the database?')) {
+      var course_id = course.course_id;
+      this.courseService.deleteCourse(course_id).subscribe(data => {
+        if(data.status == 200){
+          this.cancelEdits();
+          this.cancelNewCourse();
+          this.toastr.success('Success', 'Course Deleted');
+          this.ngOnInit();
+        }
+        else{
+          console.log("Following Error - ");
+          console.log(data.body);
+          this.toastr.error('Error Occured', 'See browsers console for error message', { timeOut: 3000 });
+        }
+      });
+    }    
   }
 
   cancelEdits() {
@@ -85,7 +103,6 @@ export class CourseComponent implements OnInit {
   }
 
   cancelNewCourse() {
-    this.newCourse = null;
     this.newCourseForm = false;
   }
 }

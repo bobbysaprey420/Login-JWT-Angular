@@ -2,33 +2,28 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Subject } from '../models/subject';
+import { VaultService } from './vault.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class SubjectService {
 
-  constructor(private httpClient: HttpClient) { }
+  constructor(private http: HttpClient, private vault : VaultService) { }
 
   getUsersFromData(course_id : String): Observable<Subject[]> {
-    return this.httpClient.get<Subject[]>('http://localhost:3000/subject/fetch-subject-by-courseid-premium-users/'+ course_id);
+    return this.http.get<Subject[]>( this.vault.apiDomain + '/subject/fetch-subject-by-courseid-premium-users/'+ course_id);
   }
 
-  newSubject(subject: Subject) {
-    
+  newSubject(data, course_id) {
+    return this.http.post( this.vault.apiDomain + '/subject/insert-subject/' + course_id, data, {observe: 'response'});
   }
 
-  updateSubject(subject: Subject) {
-    /* var data = {
-      course_name : course.course_name,
-      description : course.description,
-      priority    : course.priority
-    }
-    var url = 'http://localhost:3000/course/update-course/' + course.course_id;
-    return this.httpClient.post(url, data); */
+  updateSubject(data, subject_id) {
+    return this.http.post( this.vault.apiDomain + '/subject/update-subject/' + subject_id, data, {observe: 'response'});
   }
 
-  deleteSubject(sbject: Subject) {
-
+  deleteSubject(subject_id: Number) {
+    return this.http.delete( this.vault.apiDomain + '/subject/delete-subject/' + subject_id,  {observe: 'response'});
   }
 }

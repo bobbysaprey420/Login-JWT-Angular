@@ -2,34 +2,29 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Lecture } from '../models/lecture';
+import { VaultService } from './vault.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class LectureService {
 
-  constructor(private httpClient: HttpClient) { }
+  constructor(private http: HttpClient, private vault : VaultService) { }
 
   getUsersFromData(subject_id : String): Observable<Lecture[]> {
-    return this.httpClient.get<Lecture[]>('http://localhost:3000/lecture/fetch-lecture-by-subjectid-premium-users/'+ subject_id);
+    return this.http.get<Lecture[]>( this.vault.apiDomain + '/lecture/fetch-lecture-by-subjectid-premium-users/'+ subject_id);
   }
 
-  newLecture(lecture: Lecture) {
-    
+  newLecture(data, course_id, lecture_id) {
+    return this.http.post( this.vault.apiDomain + '/lecture/insert-lecture/' + course_id + '/' + lecture_id, data, {observe: 'response'});
   }
 
-  updateLecture(lecture: Lecture) {
-    /* var data = {
-      course_name : course.course_name,
-      description : course.description,
-      priority    : course.priority
-    }
-    var url = 'http://localhost:3000/course/update-course/' + course.course_id;
-    return this.httpClient.post(url, data); */
+  updateLecture(data, lecture_id: Number) {
+    return this.http.post( this.vault.apiDomain + '/lecture/update-lecture/' + lecture_id, data, {observe: 'response'});
   }
 
-  deleteLecture(lecture: Lecture) {
-
+  deleteLecture(lecture_id: Number) {
+    return this.http.delete( this.vault.apiDomain + '/lecture/delete-lecture/' + lecture_id,  {observe: 'response'});
   }
 
 }

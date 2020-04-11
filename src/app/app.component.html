@@ -1,6 +1,31 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-dark">
+  <a class="navbar-brand" href="#">Navigate To:</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav">
+      <li class="nav-item">
+        <button class="btn btn-sm btn-outline-info" routerLink="/course">Course Table</button>
+      </li>
+      <li class="nav-item">
+        <button class="btn btn-sm btn-outline-info" routerLink="/single-choice-question">Single Choice Qtn.</button>
+      </li>
+      <li class="nav-item">
+        <button class="btn btn-sm btn-outline-info" routerLink="/multiple-choice-question">Multiple Choice Qtn.</button>
+      </li>
+      <li class="nav-item">
+        <button class="btn btn-sm btn-outline-info" routerLink="/subjective-type-question">Subjective Type Qtn.</button>
+      </li>
+      <li class="nav-item">
+        <button class="btn btn-sm btn-outline-info" routerLink="/integer-type-question">Integer Type Qtn.</button>
+      </li>
+    </ul>
+  </div>
+</nav>
+
 <div class="container">
-
   <h1>Admin Panel</h1>
-
   <router-outlet></router-outlet>
 </div>

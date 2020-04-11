@@ -2,33 +2,29 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Notes } from '../models/Notes';
+import { VaultService } from './vault.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class NotesService {
 
-  constructor(private httpClient: HttpClient) { }
+  constructor(private http: HttpClient, private vault : VaultService) { }
 
   getUsersFromData(lecture_id : String): Observable<Notes[]> {
-    return this.httpClient.get<Notes[]>('http://localhost:3000/notes/fetch-notes-by-lectureid-premium-users/'+ lecture_id);
+    return this.http.get<Notes[]>( this.vault.apiDomain + '/notes/fetch-notes-by-lectureid-premium-users/'+ lecture_id);
   }
 
-  newNotes(notes: Notes) {
-    
+  newNotes(data, lecture_id) {
+    return this.http.post( this.vault.apiDomain + '/notes/insert-notes/' + lecture_id, data, {observe: 'response'});
   }
 
-  updateNotes(notes: Notes) {
-    /* var data = {
-      course_name : course.course_name,
-      description : course.description,
-      priority    : course.priority
-    }
-    var url = 'http://localhost:3000/course/update-course/' + course.course_id;
-    return this.httpClient.post(url, data); */
+  updateNotes(data, notes_id: Number) {
+    return this.http.post( this.vault.apiDomain + '/notes/update-notes/' + notes_id, data, {observe: 'response'});
   }
 
-  deleteNotes(notes: Notes) {
+  deleteNotes(notes_id: Number) {
+    return this.http.delete( this.vault.apiDomain + '/notes/delete-notes/' + notes_id,  {observe: 'response'});
 
   }
 

@@ -3,6 +3,7 @@ import { Lecture } from '../models/lecture';
 import { LectureService } from '../services/lecture.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgForm } from '@angular/forms';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-lecture',
@@ -19,7 +20,7 @@ export class LectureComponent implements OnInit {
   subject_id: String;
   course_id: String;
 
-  constructor(private router : Router, private lectureService : LectureService, private route: ActivatedRoute) {
+  constructor(private router : Router, private lectureService : LectureService, private route: ActivatedRoute, private toastr: ToastrService) {
     this.subject_id = this.route.snapshot.paramMap.get('subject_id');
     this.course_id =  this.route.snapshot.paramMap.get('id');
    }
@@ -51,23 +52,60 @@ export class LectureComponent implements OnInit {
   }
 
   saveLecture(form: NgForm) {
-    console.log(form.value)
-    this.lectureService.newLecture(this.newLecture);
-    this.newLectureForm = false;
+    this.lectureService.newLecture(form.value, this.course_id, this.subject_id).subscribe(data => {
+      if(data.status == 200){
+        this.newLectureForm = false;
+        this.newLecture = null;
+        this.toastr.success('Success', 'Inserted a new entry', { timeOut: 3000 });
+        this.ngOnInit();
+      }
+      else{
+        console.log("Following Error - ");
+        console.log(data.body);
+        this.toastr.error('Error Occured', 'See browsers console for error message', { timeOut: 3000 });
+      }
+    });
   }
 
   updateLecture(form: NgForm) {
-    console.log(form.value)
-    this.lectureService.updateLecture(this.editLecture);
-    this.editForm = false;
+    var lecture_id = form.value.lecture_id;
+    this.lectureService.updateLecture(form.value, lecture_id).subscribe(data => {
+      if(data.status == 200){
+        this.editForm = false;
+        this.editLecture = null;
+        this.toastr.success('Success', 'Lecture table updated', { timeOut: 3000 });
+        this.ngOnInit();
+      }
+      else{
+        console.log("Following Error - ");
+        console.log(data.body);
+        this.toastr.error('Error Occured', 'See browsers console for error message', { timeOut: 3000 });
+      }
+    });
   }
 
   removeLecture(lecture : Lecture) {
-    this.lectureService.deleteLecture(lecture);
+    if (confirm('Are you sure you want to delete this data from the database?')) {
+      var lecture_id = lecture.lecture_id;
+      this.lectureService.deleteLecture(lecture_id).subscribe(data => {
+        if(data.status == 200){
+          this.cancelEdits();
+          this.cancelNewLecture();
+          this.toastr.success('Success', 'Lecture Deleted', { timeOut: 3000 });
+          this.ngOnInit();
+        }
+        else{
+          console.log("Following Error - ");
+          console.log(data.body);
+          this.toastr.error('Error Occured', 'See browsers console for error message', { timeOut: 3000 });
+        }
+      });
+    }
   }
 
   cancelEdits() {
     this.editForm = false;
+    this.editLecture = null;
   }
 
   cancelNewLecture() {

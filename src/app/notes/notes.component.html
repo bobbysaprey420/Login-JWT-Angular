@@ -1,5 +1,6 @@
 
-<button class="back btn btn-warning" (click)="redirectBack()">Back</button>
+<button class="back btn btn-outline-info" (click)="redirectBack()">Back</button>
+<button class=" add btn btn-outline-success" (click)="showAddNotesForm()"><i class="fa fa-plus"></i></button>
 <h4>Notes Data</h4>
 <table class="table table-bordered table-striped table-hover">
     <thead>
@@ -23,10 +24,10 @@
             <td>{{ n.hide }}</td>
 
             <td>
-                <button class="btn btn-info mr-2" (click)="showEditNotesForm(n)">
+                <button class="btn btn-outline-info mr-2" (click)="showEditNotesForm(n)">
                     <i class="fa fa-edit"></i>
                 </button>
-                <button class="btn btn-danger" (click)="removeNotes(n)">
+                <button class="btn btn-outline-danger" (click)="removeNotes(n)">
                     <i class="fa fa-minus"></i>
                 </button>
             </td>
@@ -34,13 +35,11 @@
     </tbody>
 </table>
 
-<button class="btn btn-success" (click)="showAddNotesForm()"><i class="fa fa-plus"></i></button>
-<br />
 <br />
 
 <form *ngIf="editForm"  #myform2 = "ngForm" (ngSubmit) = "updateNotes(myform2)">
     <h2>Edit Notes Details</h2>
-    <p>Lecture ID <input type="text" name="lecture_id" ngModel="{{editNotes.lecture_id}}"  readonly/></p>
+    <p>Lecture ID <input type="text" name="lecture_id" ngModel="{{editNotes.lecture_id}}" /></p>
     <p>Notes ID <input type="text" name="notes_id" ngModel="{{editNotes.notes_id}}" readonly/></p>
     <p>Notes Name <input type="text" name="notes_name" ngModel="{{editNotes.notes_name}}" /></p>
     <p>Notes Link <input type="text" name="notes_link" ngModel="{{editNotes.notes_link}}" /></p>
@@ -48,8 +47,8 @@
     <p>Hide <input type="text" name="hide" ngModel="{{editNotes.hide}}" /></p>
 
     <p>
-        <button type="submit" class="btn btn-primary mr-2">Submit</button>
-        <button type="button" class="btn btn-warning" (click)="cancelEdits()">Cancel</button>
+        <button type="submit" class="btn btn-outline-primary mr-2">Submit</button>
+        <button type="button" class="btn btn-outline-dark" (click)="cancelEdits()">Cancel</button>
     </p>
 </form>
 
@@ -62,8 +61,8 @@
     <p>Hide <input type="text" name="hide" ngModel/></p>
 
     <p>
-        <button type="submit" class="btn btn-primary mr-2">Submit</button>
-        <button type="button" class="btn btn-warning" (click)="cancelNewNotes()">Cancel</button>
+        <button type="submit" class="btn btn-outline-primary mr-2">Submit</button>
+        <button type="button" class="btn btn-outline-dark" (click)="cancelNewNotes()">Cancel</button>
     </p>
 </form>
 

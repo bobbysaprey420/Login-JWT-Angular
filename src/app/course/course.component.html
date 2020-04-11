@@ -1,3 +1,5 @@
+<button class="add btn btn-outline-success" (click)="showAddCourseForm()"><i class="fa fa-plus"></i></button>
+<h4>Course Data</h4>
 <table class="table table-bordered table-striped table-hover">
     <thead>
         <tr>
@@ -16,20 +18,20 @@
             <td>{{ c.priority }}</td>
 
             <td>
-                <button class="btn btn-info mr-2" (click)="showEditCourseForm(c)">
+                <button class="btn btn-outline-info mr-2" (click)="showEditCourseForm(c)">
                     <i class="fa fa-edit"></i>
                 </button>
-                <button class="btn btn-danger" (click)="removeCourse(c)">
+                <button class="btn btn-outline-danger" (click)="removeCourse(c)">
                     <i class="fa fa-minus"></i>
                 </button>
-                <a class="btn btn-warning subject_btn"  [routerLink] = "['/course', c.course_id, 'subject']">View Subjects</a>
+                <br>
+                <a class="btn btn-outline-dark subject_btn"  [routerLink] = "['/course', c.course_id, 'subject']">View Subjects</a>
             </td>
         </tr>
     </tbody>
 </table>
 
-<button class="btn btn-success" (click)="showAddCourseForm()"><i class="fa fa-plus"></i></button>
-<br />
+
 <br />
 
 <form *ngIf="editCourse"   #myform2 = "ngForm" (ngSubmit) = "updateCourse(myform2)">
@@ -39,8 +41,8 @@
     <p>Description <input type="text" name="description" ngModel="{{editCourse.description}}" /></p>
     <p>Priority <input type="text" name="priority" ngModel="{{editCourse.priority}}" /></p>
     <p>
-        <button type="submit" class="btn btn-primary mr-2">Submit</button>
-        <button type="button" class="btn btn-warning" (click)="cancelEdits()">Cancel</button>
+        <button type="submit" class="btn btn-outline-primary mr-2">Submit</button>
+        <button type="button" class="btn btn-outline-dark" (click)="cancelEdits()">Cancel</button>
     </p>
 </form>
 
@@ -50,8 +52,8 @@
     <p>Description <input type="text" name="description" ngModel /></p>
     <p>Priority <input type="text" name="priority" ngModel /></p>
     
-        <button type="submit" class="btn btn-primary mr-2">Submit</button>
-        <button type="button" class="btn btn-warning" (click)="cancelNewCourse()">Cancel</button>
+        <button type="submit" class="btn btn-outline-primary mr-2">Submit</button>
+        <button type="button" class="btn btn-outline-dark" (click)="cancelNewCourse()">Cancel</button>
     
 </form>
 

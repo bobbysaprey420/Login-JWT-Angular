@@ -10,19 +10,29 @@ import { SubjectComponent } from './subject/subject.component';
 import { LectureComponent } from './lecture/lecture.component';
 import { NotesComponent } from './notes/notes.component';
 import { ToastrModule } from 'ngx-toastr';
-
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { SingleChoiceComponent } from './single-choice/single-choice.component';
+import { MultipleChoiceComponent } from './multiple-choice/multiple-choice.component';
+import { SubjectiveTypeComponent } from './subjective-type/subjective-type.component';
+import { IntegerTypeComponent } from './integer-type/integer-type.component';
+ 
 @NgModule({
   declarations: [
     AppComponent,
     CourseComponent,
     SubjectComponent,
     LectureComponent,
-    NotesComponent
+    NotesComponent,
+    SingleChoiceComponent,
+    MultipleChoiceComponent,
+    SubjectiveTypeComponent,
+    IntegerTypeComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
+    BrowserAnimationsModule,
     FormsModule,
     ToastrModule.forRoot()
   ],
