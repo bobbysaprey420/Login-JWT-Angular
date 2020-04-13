@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgForm } from '@angular/forms';
-import { Notes } from '../models/Notes';
+import { Notes } from '../models/notes';
 import { NotesService } from '../services/notes.service'
 import { ToastrService } from 'ngx-toastr';
 
