@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { Notes } from '../models/Notes';
+import { Notes } from '../models/notes';
 import { VaultService } from './vault.service';
 
 @Injectable({
