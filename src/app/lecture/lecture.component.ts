@@ -29,7 +29,6 @@ export class LectureComponent implements OnInit {
     this.editForm = false;
     this.newLectureForm = false;
     this.subject_id = this.route.snapshot.paramMap.get('subject_id');
-    console.log(this.subject_id)
     this.getLectures();
   }
 
