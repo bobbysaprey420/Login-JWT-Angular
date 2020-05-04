@@ -1,0 +1,108 @@
+
+<button class="back btn btn-outline-info" (click)="redirectBack()">Back</button>
+<button class=" add btn btn-outline-success" (click)="showAddForm()"><i class="fa fa-plus"></i></button>
+
+<h4>Question Data</h4>
+<table class="table table-bordered table-striped table-hover">
+    <thead>
+        <tr>
+            <th class="text-center">Question ID</th>
+            <th class="text-center">Quiz ID</th>
+            <th class="text-center">Question</th>
+            <th class="text-center">Options</th>
+            <th class="text-center">Option1</th>
+            <th class="text-center">Option2</th>
+            <th class="text-center">Option3</th>
+            <th class="text-center">Option4</th>
+            <th class="text-center">Option5</th>
+            <th class="text-center">Option6</th>
+            <th class="text-center">Option7</th>
+            <th class="text-center">Correct answer</th>
+            <th class="text-center">Total Mark</th>
+            
+            <th class="text-center">Priority</th>
+            <th class="text-center">Hide</th>
+            <th class="text-center">Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let l of data">
+            <td>{{ l.question_id }}</td>
+            <td>{{ l.quiz_id }}</td>
+            <td>{{ l.question }}</td>
+            <td>{{ l.options }}</td>
+            <td>{{ l.option1 }}</td>
+            <td>{{ l.option2 }}</td>
+            <td>{{ l.option3 }}</td>
+            <td>{{ l.option4 }}</td>
+            <td>{{ l.option5 }}</td>
+            <td>{{ l.option6 }}</td>
+            <td>{{ l.option7 }}</td>
+            <td>{{ l.correct_answer }}</td>
+            <td>{{ l.total_mark }}</td>
+            <td>{{ l.priority }}</td>
+            <td>{{ l.hide }}</td>
+
+            <td>
+                <button class="btn btn-outline-info mr-2" (click)="showEditForm(l)">
+                    <i class="fa fa-edit"></i>
+                </button>
+                <button class="btn btn-outline-danger" (click)="removeData(l)">
+                    <i class="fa fa-minus"></i>
+                </button>
+                <br>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+
+<br />
+
+<form *ngIf="editForm"  #myform2 = "ngForm" (ngSubmit) = "updateData(myform2)">
+    <h2>Edit Question Details</h2>
+    <p>Question ID <input type="text" name="question_id" ngModel="{{editData.question_id}}"  readonly/></p>
+    <p>Quiz ID <input type="text" name="quiz_id" ngModel="{{editData.quiz_id}}" readonly/></p>
+    <p>Question <input type="text" name="question" ngModel="{{editData.question}}" /></p>
+    <p>Options <input type="text" name="options" ngModel="{{editData.options}}" /></p>
+    <p>Option 1<input type="text" name="option1" ngModel="{{editData.option1}}" /></p>
+    <p>Option 2<input type="text" name="option2" ngModel="{{editData.option2}}" /></p>
+    <p>Option 3<input type="text" name="option3" ngModel="{{editData.option3}}" /></p>
+    <p>Option 4<input type="text" name="option4" ngModel="{{editData.option4}}" /></p>
+    <p>Option 5<input type="text" name="option5" ngModel="{{editData.option5}}" /></p>
+    <p>Option 6<input type="text" name="option6" ngModel="{{editData.option6}}" /></p>
+    <p>Option 7<input type="text" name="option7" ngModel="{{editData.option7}}" /></p>
+    <p>Correct Answer<input type="text" name="correct_answer" ngModel="{{editData.correct_answer}}" /></p>
+    <p>Total Mark<input type="text" name="total_mark" ngModel="{{editData.total_mark}}" /></p>
+    <p>Priority <input type="text" name="priority" ngModel="{{editData.priority}}" /></p>
+    <p>Hide <input type="text" name="hide" ngModel="{{editData.hide}}" /></p>
+
+    <p>
+        <button type="submit" class="btn btn-outline-primary mr-2">Submit</button>
+        <button type="button" class="btn btn-outline-dark" (click)="cancelEdits()">Cancel</button>
+    </p>
+</form>
+
+<form *ngIf="newForm" #myform = "ngForm" (ngSubmit) = "saveData(myform)">
+    <h2>Add New Question</h2>
+    <p>Quiz ID <input type="text" name="quiz_id" ngModel="{{quiz_id}}" readonly/></p>
+    <p>Question <input type="text" name="question" ngModel/></p>
+    <p>Options <input type="text" name="options" ngModel /></p>
+    <p>Option 1<input type="text" name="option1" ngModel /></p>
+    <p>Option 2<input type="text" name="option2" ngModel /></p>
+    <p>Option 3<input type="text" name="option3" ngModel /></p>
+    <p>Option 4<input type="text" name="option4" ngModel /></p>
+    <p>Option 5<input type="text" name="option5" ngModel /></p>
+    <p>Option 6<input type="text" name="option6" ngModel /></p>
+    <p>Option 7<input type="text" name="option7" ngModel /></p>
+    <p>Correct Answer<input type="text" name="correct_answer" ngModel /></p>
+    <p>Total Mark<input type="text" name="total_mark" ngModel/></p>
+    <p>Priority <input type="text" name="priority" ngModel  /></p>
+    <p>Hide <input type="text" name="hide" ngModel /></p>
+
+    <p>
+        <button type="submit" class="btn btn-outline-primary mr-2">Submit</button>
+        <button type="button" class="btn btn-outline-dark" (click)="cancelNew()">Cancel</button>
+    </p>
+</form>
+

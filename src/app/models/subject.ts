@@ -4,6 +4,5 @@ export interface Subject {
     subject_name: String,
     description: String,
     hide: Boolean,
-    priority: Number,
-    created_at: Date
+    priority: Number
 }

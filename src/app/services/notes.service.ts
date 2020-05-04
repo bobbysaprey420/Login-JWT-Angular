@@ -11,12 +11,12 @@ export class NotesService {
 
   constructor(private http: HttpClient, private vault : VaultService) { }
 
-  getUsersFromData(lecture_id : String): Observable<Notes[]> {
-    return this.http.get<Notes[]>( this.vault.apiDomain + '/notes/fetch-notes-by-lectureid-premium-users/'+ lecture_id);
+  getUsersFromData(topic_id : String): Observable<Notes[]> {
+    return this.http.get<Notes[]>( this.vault.apiDomain + '/notes/fetch-notes-by-topicid/'+ topic_id);
   }
 
-  newNotes(data, lecture_id) {
-    return this.http.post( this.vault.apiDomain + '/notes/insert-notes/' + lecture_id, data, {observe: 'response'});
+  newNotes(data, topic_id) {
+    return this.http.post( this.vault.apiDomain + '/notes/insert-notes/' + topic_id, data, {observe: 'response'});
   }
 
   updateNotes(data, notes_id: Number) {

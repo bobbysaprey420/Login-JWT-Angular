@@ -11,12 +11,12 @@ export class LectureService {
 
   constructor(private http: HttpClient, private vault : VaultService) { }
 
-  getUsersFromData(subject_id : String): Observable<Lecture[]> {
-    return this.http.get<Lecture[]>( this.vault.apiDomain + '/lecture/fetch-lecture-by-subjectid-premium-users/'+ subject_id);
+  getUsersFromData(topic_id : String): Observable<Lecture[]> {
+    return this.http.get<Lecture[]>( this.vault.apiDomain + '/lecture/fetch-lecture-by-topicid/'+ topic_id);
   }
 
-  newLecture(data, course_id, lecture_id) {
-    return this.http.post( this.vault.apiDomain + '/lecture/insert-lecture/' + course_id + '/' + lecture_id, data, {observe: 'response'});
+  newLecture(data, topic_id) {
+    return this.http.post( this.vault.apiDomain + '/lecture/insert-lecture/' + topic_id, data, {observe: 'response'});
   }
 
   updateLecture(data, lecture_id: Number) {

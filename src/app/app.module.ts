@@ -11,10 +11,11 @@ import { LectureComponent } from './lecture/lecture.component';
 import { NotesComponent } from './notes/notes.component';
 import { ToastrModule } from 'ngx-toastr';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { SingleChoiceComponent } from './single-choice/single-choice.component';
-import { MultipleChoiceComponent } from './multiple-choice/multiple-choice.component';
-import { SubjectiveTypeComponent } from './subjective-type/subjective-type.component';
-import { IntegerTypeComponent } from './integer-type/integer-type.component';
+import { TopicComponent } from './topic/topic.component';
+import { QuizComponent } from './quiz/quiz.component';
+import { QuestionComponent } from './question/question.component';
+import { UserquizComponent } from './userquiz/userquiz.component';
+import { UserquizanswerComponent } from './userquizanswer/userquizanswer.component';
  
 @NgModule({
   declarations: [
@@ -23,10 +24,11 @@ import { IntegerTypeComponent } from './integer-type/integer-type.component';
     SubjectComponent,
     LectureComponent,
     NotesComponent,
-    SingleChoiceComponent,
-    MultipleChoiceComponent,
-    SubjectiveTypeComponent,
-    IntegerTypeComponent
+    TopicComponent,
+    QuizComponent,
+    QuestionComponent,
+    UserquizComponent,
+    UserquizanswerComponent
   ],
   imports: [
     BrowserModule,

@@ -1,11 +1,10 @@
 export interface Lecture {
-    course_id: Number,
-    subject_id: Number,
+    topic_id: Number,
     lecture_id: Number,
     lecture_name: String,
     video_link: String,
     description: String,
+    subscription : Boolean,
     hide: Boolean,
-    priority: Number,
-    created_at: Date
+    priority: Number
 }

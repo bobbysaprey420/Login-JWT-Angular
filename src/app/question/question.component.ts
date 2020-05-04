@@ -2,36 +2,43 @@ import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { NgForm } from '@angular/forms';
-import { IntegerType } from '../models/integer-type';
-import { IntegerTypeService } from '../services/integer-type.service';
+import { Question } from '../models/question';
+import { QuestionService } from '../services/question.service';
+
 
 @Component({
-  selector: 'app-integer-type',
-  templateUrl: './integer-type.component.html',
-  styleUrls: ['./integer-type.component.css']
+  selector: 'app-question',
+  templateUrl: './question.component.html',
+  styleUrls: ['./question.component.css']
 })
-export class IntegerTypeComponent implements OnInit {
-
+export class QuestionComponent implements OnInit {
   editForm : Boolean;
   newForm : Boolean;
-  data : IntegerType[];
-  editData : IntegerType;
-
-  constructor(private router : Router, private integerTypeService : IntegerTypeService, private route: ActivatedRoute, private toastr: ToastrService) {}
+  data : Question[];
+  editData : Question;
+  quiz_id : String;
+  topic_id: String;
+  subject_id : String;
+  course_id : String;
+  constructor(private router : Router, private questionService : QuestionService, private route: ActivatedRoute, private toastr: ToastrService) {}
 
   ngOnInit() {
     this.editForm = false;
     this.newForm = false;
+    this.topic_id = this.route.snapshot.paramMap.get('topic_id');
+    this.subject_id = this.route.snapshot.paramMap.get('subject_id');
+    this.course_id =  this.route.snapshot.paramMap.get('id');
+    this.quiz_id =  this.route.snapshot.paramMap.get('quiz_id');
     this.getLectures();
   }
 
   getLectures() {
-    this.integerTypeService.getUsersFromData().subscribe(res => {
+    this.questionService.getUsersFromData(this.quiz_id).subscribe(res => {
       this.data = res;
     });
   }
 
-  showEditForm(editData : IntegerType) {
+  showEditForm(editData : Question) {
     this.editForm = true;
     this.editData = editData;
     this.newForm = false;
@@ -43,8 +50,8 @@ export class IntegerTypeComponent implements OnInit {
 
   }
 
-  newRecord(form: NgForm) {
-    this.integerTypeService.newRecord(form.value).subscribe(data => {
+  saveData(form: NgForm) {
+    this.questionService.newRecord(form.value).subscribe(data => {
       if(data.status == 200){
         this.newForm = false;
         this.toastr.success('Success', 'Inserted a new entry', { timeOut: 3000 });
@@ -58,13 +65,13 @@ export class IntegerTypeComponent implements OnInit {
     });
   }
 
-  updateRecord(form: NgForm) {
+  updateData(form: NgForm) {
     var question_id = form.value.question_id;
-    this.integerTypeService.updateRecord(form.value, question_id).subscribe(data => {
+    this.questionService.updateRecord(form.value, question_id).subscribe(data => {
       if(data.status == 200){
         this.editForm = false;
         this.editData = null;
-        this.toastr.success('Success', 'Integer Type Question table updated', { timeOut: 3000 });
+        this.toastr.success('Success', 'Question table updated', { timeOut: 3000 });
         this.ngOnInit();
       }
       else{
@@ -75,14 +82,14 @@ export class IntegerTypeComponent implements OnInit {
     });
   }
 
-  removeRecord(data : IntegerType) {
+  removeData(data : Question) {
     if (confirm('Are you sure you want to delete this data from the database?')) {
       var question_id = data.question_id;
-      this.integerTypeService.deleteRecord(question_id).subscribe(data => {
+      this.questionService.deleteRecord(question_id).subscribe(data => {
         if(data.status == 200){
           this.cancelEdits();
           this.cancelNew();
-          this.toastr.success('Success', 'Integer Type Question Deleted', { timeOut: 3000 });
+          this.toastr.success('Success', ' Question Deleted', { timeOut: 3000 });
           this.ngOnInit();
         }
         else{
@@ -103,5 +110,7 @@ export class IntegerTypeComponent implements OnInit {
     this.newForm = false;
   }
 
-
+  redirectBack(){
+    this.router.navigate(['/course', this.course_id, 'subject', this.subject_id, 'topic', this.topic_id, 'quiz']);
+  }
 }

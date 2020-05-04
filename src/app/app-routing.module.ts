@@ -4,21 +4,24 @@ import { CourseComponent } from './course/course.component';
 import { SubjectComponent } from './subject/subject.component';
 import { LectureComponent } from './lecture/lecture.component';
 import { NotesComponent } from './notes/notes.component';
-import { SingleChoiceComponent } from './single-choice/single-choice.component';
-import { MultipleChoiceComponent } from './multiple-choice/multiple-choice.component';
-import { SubjectiveTypeComponent } from './subjective-type/subjective-type.component';
-import { IntegerTypeComponent } from './integer-type/integer-type.component';
+import { TopicComponent } from './topic/topic.component';
+import { QuizComponent } from './quiz/quiz.component';
+import { QuestionComponent } from './question/question.component';
+import { UserquizComponent } from './userquiz/userquiz.component';
+import { UserquizanswerComponent } from './userquizanswer/userquizanswer.component';
 
 
 const routes: Routes = [
   { path: 'course', component: CourseComponent },
   { path : 'course/:id/subject', component: SubjectComponent},
-  { path : 'course/:id/subject/:subject_id/lecture', component: LectureComponent},
-  { path : 'course/:id/subject/:subject_id/lecture/:lecture_id/notes', component: NotesComponent},
-  { path : 'single-choice-question', component: SingleChoiceComponent},
-  { path : 'multiple-choice-question', component: MultipleChoiceComponent},
-  { path : 'subjective-type-question', component: SubjectiveTypeComponent},
-  { path : 'integer-type-question', component: IntegerTypeComponent}
+  { path : 'course/:id/subject/:subject_id/topic', component: TopicComponent},
+  { path : 'course/:id/subject/:subject_id/topic/:topic_id/notes', component: NotesComponent},
+  { path : 'course/:id/subject/:subject_id/topic/:topic_id/lecture', component: LectureComponent},
+  { path : 'course/:id/subject/:subject_id/topic/:topic_id/quiz', component: QuizComponent},
+  { path : 'course/:id/subject/:subject_id/topic/:topic_id/quiz/:quiz_id/questions', component: QuestionComponent},
+  { path : 'course/:id/subject/:subject_id/topic/:topic_id/quiz/:quiz_id/userquiz', component: UserquizComponent},
+  { path : 'course/:id/subject/:subject_id/topic/:topic_id/quiz/:quiz_id/userquiz/:user_id/answers', component: UserquizanswerComponent},
+  
 ];
 
 @NgModule({

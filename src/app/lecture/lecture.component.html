@@ -6,12 +6,13 @@
 <table class="table table-bordered table-striped table-hover">
     <thead>
         <tr>
-            <th class="text-center">Course ID</th>
-            <th class="text-center">Subject ID</th>
+            <th class="text-center">Topic ID</th>
             <th class="text-center">Lecture ID</th>
             <th class="text-center">Lecture Name</th>
             <th class="text-center">Video Link</th>
             <th class="text-center">Description</th>
+            <th class="text-center">Subscription</th>
+            
             <th class="text-center">Priority</th>
             <th class="text-center">Hide</th>
             <th class="text-center">Action</th>
@@ -19,12 +20,12 @@
     </thead>
     <tbody>
         <tr *ngFor="let l of lecture">
-            <td>{{ l.course_id }}</td>
-            <td>{{ l.subject_id }}</td>
+            <td>{{ l.topic_id }}</td>
             <td>{{ l.lecture_id }}</td>
             <td>{{ l.lecture_name }}</td>
             <td>{{ l.video_link }}</td>
             <td>{{ l.description }}</td>
+            <td>{{ l.subscription }}</td>
             <td>{{ l.priority }}</td>
             <td>{{ l.hide }}</td>
 
@@ -36,7 +37,6 @@
                     <i class="fa fa-minus"></i>
                 </button>
                 <br>
-                <a class="btn btn-outline-dark lecture_btn" [routerLink] = "['/course', l.course_id, 'subject', l.subject_id, 'lecture', l.lecture_id, 'notes']">View Notes</a>
             </td>
         </tr>
     </tbody>
@@ -47,11 +47,11 @@
 
 <form *ngIf="editForm"  #myform2 = "ngForm" (ngSubmit) = "updateLecture(myform2)">
     <h2>Edit Lecture Details</h2>
-    <p>Course ID <input type="text" name="course_id" ngModel="{{editLecture.course_id}}"  readonly/></p>
-    <p>Subject ID <input type="text" name="subject_id" ngModel="{{editLecture.subject_id}}"  readonly/></p>
+    <p>Topic ID <input type="text" name="topic_id" ngModel="{{editLecture.topic_id}}"  readonly/></p>
     <p>Lecture ID <input type="text" name="lecture_id" ngModel="{{editLecture.lecture_id}}" readonly/></p>
     <p>Lecture Name <input type="text" name="lecture_name" ngModel="{{editLecture.lecture_name}}" /></p>
     <p>Description <input type="text" name="description" ngModel="{{editLecture.description}}" /></p>
+    <p>Subscription <input type="text" name="subscription" ngModel="{{editLecture.subscription}}" /></p>
     <p>Video Link <input type="text" name="video_link" ngModel="{{editLecture.video_link}}" /></p>
     <p>Priority <input type="text" name="priority" ngModel="{{editLecture.priority}}" /></p>
     <p>Hide <input type="text" name="hide" ngModel="{{editLecture.hide}}" /></p>
@@ -64,10 +64,10 @@
 
 <form *ngIf="newLectureForm" #myform = "ngForm" (ngSubmit) = "saveLecture(myform)">
     <h2>Add New Course</h2>
-    <p>Course ID <input type="text" name="course_id" ngModel="{{course_id}}"  readonly/></p>
-    <p>Subject ID <input type="text" name="subject_id" ngModel="{{subject_id}}"  readonly/></p>
+    <p>Topic ID <input type="text" name="topic_id" ngModel="{{topic_id}}"  readonly/></p>
     <p>Lecture Name <input type="text" name="lecture_name" ngModel required/></p>
     <p>Description <input type="text" name="description" ngModel/></p>
+    <p>Subscription <input type="text" name="subscription" ngModel/></p>
     <p>Video Link <input type="text" name="video_link" ngModel/></p>
     <p>Priority <input type="text" name="priority" ngModel/></p>
     <p>Hide <input type="text" name="hide" ngModel/></p>

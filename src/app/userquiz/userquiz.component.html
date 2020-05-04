@@ -1,0 +1,26 @@
+
+<button class="back btn btn-outline-info" (click)="redirectBack()">Back</button>
+<h4>User Detail for Quiz</h4>
+<table class="table table-bordered table-striped table-hover">
+    <thead>
+        <tr>
+            <th class="text-center">User ID</th>
+            <th class="text-center">Username</th>
+            <th class="text-center">Email</th>
+            <th class="text-center">Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let n of users">
+            <td>{{ n.user_id }}</td>
+            <td>{{ n.username }}</td>
+            <td>{{ n.email }}</td>
+            <td>
+                <a class="btn btn-outline-dark lecture_btn" [routerLink] = "['/course', course_id, 'subject', subject_id, 'topic', topic_id, 'quiz', quiz_id, 'userquiz', n.user_id, 'answers']">View User's Answers</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+
+

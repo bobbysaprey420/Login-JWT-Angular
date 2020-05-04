@@ -1,28 +1,28 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgForm } from '@angular/forms';
-import { Notes } from '../models/notes';
-import { NotesService } from '../services/notes.service'
 import { ToastrService } from 'ngx-toastr';
+import { Quiz } from '../models/quiz';
+import { QuizService } from '../services/quiz.service';
 
 
 @Component({
-  selector: 'app-notes',
-  templateUrl: './notes.component.html',
-  styleUrls: ['./notes.component.css']
+  selector: 'app-quiz',
+  templateUrl: './quiz.component.html',
+  styleUrls: ['./quiz.component.css']
 })
-export class NotesComponent implements OnInit {
+export class QuizComponent implements OnInit {
 
-  notes: Notes[];
-  editNotes: Notes;
+ 
+  quiz: Quiz[];
+  editQuiz: Quiz;
   editForm: Boolean;
-  newNotes: Notes;
-  newNotesForm: Boolean;
+  newForm: Boolean;
   topic_id: String;
   course_id: String;
   subject_id: String;
 
-  constructor(private router : Router, private notesService : NotesService,  private toastr: ToastrService, private route: ActivatedRoute) {
+  constructor(private router : Router, private quizService : QuizService,  private toastr: ToastrService, private route: ActivatedRoute) {
     this.topic_id =  this.route.snapshot.paramMap.get('topic_id');
     this.course_id =  this.route.snapshot.paramMap.get('id');
     this.subject_id =  this.route.snapshot.paramMap.get('subject_id');
@@ -30,33 +30,33 @@ export class NotesComponent implements OnInit {
 
   ngOnInit() {
     this.editForm = false;
-    this.newNotesForm = false;
-    this.getNotes();
+    this.newForm = false;
+    this.getData();
   }
 
-  getNotes() {
-    this.notesService.getUsersFromData(this.topic_id).subscribe(res => {
-      this.notes = res;
+  getData() {
+    this.quizService.getUsersFromData(this.topic_id).subscribe(res => {
+      this.quiz = res;
     });
   }
 
-  showEditNotesForm(editNotes : Notes) {
+  showEditForm(editQuiz : Quiz) {
     this.editForm = true;
-    this.editNotes = editNotes;
-    this.newNotesForm = false;
+    this.editQuiz = editQuiz;
+    this.newForm = false;
   }
 
-  showAddNotesForm() {
+  showAddForm() {
     this.editForm = false;
-    this.newNotesForm = true;
+    this.newForm = true;
 
   }
 
   saveNotes(form: NgForm) {
-    this.notesService.newNotes(form.value, this.topic_id).subscribe(data => {
+    this.quizService.newQuiz(form.value, this.topic_id).subscribe(data => {
       if(data.status == 200){
-        this.newNotesForm = false;
-        this.newNotes = null;
+        this.newForm = false;
+        this.editQuiz = null;
         this.toastr.success('Success', 'Inserted a new entry', { timeOut: 3000 });
         this.ngOnInit();
       }
@@ -69,13 +69,13 @@ export class NotesComponent implements OnInit {
   }
 
   updateNotes(form: NgForm) {
-    var notes_id = form.value.notes_id;
+    var quiz_id = form.value.quiz_id;
     console.log(form.value)
-    this.notesService.updateNotes(form.value, notes_id).subscribe(data => {
+    this.quizService.updateQuiz(form.value, quiz_id).subscribe(data => {
       if(data.status == 200){
         this.editForm = false;
-        this.editNotes = null;
-        this.toastr.success('Success', 'Notes table updated', { timeOut: 3000 });
+        this.editQuiz = null;
+        this.toastr.success('Success', 'Quiz table updated', { timeOut: 3000 });
         this.ngOnInit();
       }
       else{
@@ -86,14 +86,14 @@ export class NotesComponent implements OnInit {
     });
   }
 
-  removeNotes(notes : Notes) {
+  removeData(quiz : Quiz) {
     if (confirm('Are you sure you want to delete this data from the database?')) {
-      var notes_id = notes.notes_id;
-      this.notesService.deleteNotes(notes_id).subscribe(data => {
+      var quiz_id = quiz.quiz_id;
+      this.quizService.deleteQuiz(quiz_id).subscribe(data => {
         if(data.status == 200){
           this.cancelEdits();
           this.cancelNewNotes();
-          this.toastr.success('Success', 'Notes Deleted', { timeOut: 3000 });
+          this.toastr.success('Success', 'Quiz Deleted', { timeOut: 3000 });
           this.ngOnInit();
         }
         else{
@@ -110,7 +110,7 @@ export class NotesComponent implements OnInit {
   }
 
   cancelNewNotes() {
-    this.newNotesForm = false;
+    this.newForm = false;
   }
 
   redirectBack(){

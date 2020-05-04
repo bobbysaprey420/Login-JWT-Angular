@@ -17,10 +17,11 @@ export class LectureComponent implements OnInit {
   editForm: Boolean;
   newLecture: Lecture;
   newLectureForm: Boolean;
-  subject_id: String;
-  course_id: String;
-
+  topic_id: String;
+  subject_id : String;
+  course_id : String;
   constructor(private router : Router, private lectureService : LectureService, private route: ActivatedRoute, private toastr: ToastrService) {
+    this.topic_id = this.route.snapshot.paramMap.get('topic_id');
     this.subject_id = this.route.snapshot.paramMap.get('subject_id');
     this.course_id =  this.route.snapshot.paramMap.get('id');
    }
@@ -28,12 +29,14 @@ export class LectureComponent implements OnInit {
   ngOnInit() {
     this.editForm = false;
     this.newLectureForm = false;
+    this.topic_id = this.route.snapshot.paramMap.get('topic_id');
     this.subject_id = this.route.snapshot.paramMap.get('subject_id');
+    this.course_id =  this.route.snapshot.paramMap.get('id');
     this.getLectures();
   }
 
   getLectures() {
-    this.lectureService.getUsersFromData(this.subject_id).subscribe(res => {
+    this.lectureService.getUsersFromData(this.topic_id).subscribe(res => {
       this.lecture = res;
     });
   }
@@ -51,7 +54,7 @@ export class LectureComponent implements OnInit {
   }
 
   saveLecture(form: NgForm) {
-    this.lectureService.newLecture(form.value, this.course_id, this.subject_id).subscribe(data => {
+    this.lectureService.newLecture(form.value, this.topic_id).subscribe(data => {
       if(data.status == 200){
         this.newLectureForm = false;
         this.newLecture = null;
@@ -112,7 +115,7 @@ export class LectureComponent implements OnInit {
   }
 
   redirectBack(){
-    this.router.navigate(['/course', this.course_id, 'subject']);
+    this.router.navigate(['/course', this.course_id, 'subject', this.subject_id, 'topic']);
   }
 }
 
