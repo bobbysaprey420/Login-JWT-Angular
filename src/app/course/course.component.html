@@ -7,6 +7,8 @@
             <th class="text-center">Course Name</th>
             <th class="text-center">Description</th>
             <th class="text-center">Priority</th>
+            <th class="text-center">Hide</th>
+            
             <th class="text-center">Action</th>
         </tr>
     </thead>
@@ -16,6 +18,8 @@
             <td>{{ c.course_name }}</td>
             <td>{{ c.description }}</td>
             <td>{{ c.priority }}</td>
+            <td>{{ c.hide }}</td>
+            
 
             <td>
                 <button class="btn btn-outline-info mr-2" (click)="showEditCourseForm(c)">
@@ -40,6 +44,8 @@
     <p>Course Name <input type="text" name="course_name" ngModel="{{editCourse.course_name}}" required/></p>
     <p>Description <input type="text" name="description" ngModel="{{editCourse.description}}" /></p>
     <p>Priority <input type="text" name="priority" ngModel="{{editCourse.priority}}" /></p>
+    <p>Hide <input type="text" name="hide" ngModel="{{editCourse.hide}}" /></p>
+
     <p>
         <button type="submit" class="btn btn-outline-primary mr-2">Submit</button>
         <button type="button" class="btn btn-outline-dark" (click)="cancelEdits()">Cancel</button>
@@ -51,6 +57,8 @@
     <p>Course Name <input type="text" name="course_name"  required ngModel/></p>
     <p>Description <input type="text" name="description" ngModel /></p>
     <p>Priority <input type="text" name="priority" ngModel /></p>
+    <p>Hide <input type="text" name="hide" ngModel /></p>
+    
     
         <button type="submit" class="btn btn-outline-primary mr-2">Submit</button>
         <button type="button" class="btn btn-outline-dark" (click)="cancelNewCourse()">Cancel</button>
