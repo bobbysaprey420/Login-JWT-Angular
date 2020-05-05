@@ -12,7 +12,7 @@ export class LectureService {
   constructor(private http: HttpClient, private vault : VaultService) { }
 
   getUsersFromData(topic_id : String): Observable<Lecture[]> {
-    return this.http.get<Lecture[]>( this.vault.apiDomain + '/lecture/fetch-lecture-by-topicid/'+ topic_id);
+    return this.http.get<Lecture[]>( this.vault.apiDomain + '/lecture/fetch-lecture-by-topicid-admin/'+ topic_id);
   }
 
   newLecture(data, topic_id) {

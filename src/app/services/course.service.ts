@@ -15,7 +15,7 @@ export class CourseService {
    }
 
   getUsersFromData(): Observable<Course[]> {
-    return this.http.get<Course[]>( this.vault.apiDomain + '/course/fetch-courses');
+    return this.http.get<Course[]>( this.vault.apiDomain + '/course/fetch-courses-admin');
   }
 
   newCourse(data) {

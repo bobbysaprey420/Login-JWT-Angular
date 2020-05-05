@@ -12,7 +12,7 @@ export class SubjectService {
   constructor(private http: HttpClient, private vault : VaultService) { }
 
   getUsersFromData(course_id : String): Observable<Subject[]> {
-    return this.http.get<Subject[]>( this.vault.apiDomain + '/subject/fetch-subject-by-courseid-premium-users/'+ course_id);
+    return this.http.get<Subject[]>( this.vault.apiDomain + '/subject/fetch-subject-by-courseid-admin/'+ course_id);
   }
 
   newSubject(data, course_id) {

@@ -12,7 +12,7 @@ export class QuestionService {
   constructor(private http: HttpClient, private vault : VaultService) { }
 
   getUsersFromData(quiz_id : String): Observable<Question[]> {
-    return this.http.get<Question[]>( this.vault.apiDomain + '/question/fetch-questions-by-quizid/' + quiz_id);
+    return this.http.get<Question[]>( this.vault.apiDomain + '/question/fetch-questions-by-quizid-admin/' + quiz_id);
   }
 
   newRecord(data) {

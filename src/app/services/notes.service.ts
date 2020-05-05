@@ -12,7 +12,7 @@ export class NotesService {
   constructor(private http: HttpClient, private vault : VaultService) { }
 
   getUsersFromData(topic_id : String): Observable<Notes[]> {
-    return this.http.get<Notes[]>( this.vault.apiDomain + '/notes/fetch-notes-by-topicid/'+ topic_id);
+    return this.http.get<Notes[]>( this.vault.apiDomain + '/notes/fetch-notes-by-topicid-admin/'+ topic_id);
   }
 
   newNotes(data, topic_id) {

@@ -12,7 +12,7 @@ export class QuizService {
   constructor(private http: HttpClient, private vault : VaultService) { }
 
   getUsersFromData(topic_id : String): Observable<Quiz[]> {
-    return this.http.get<Quiz[]>( this.vault.apiDomain + '/quiz/fetch-quiz-by-topicid/'+ topic_id);
+    return this.http.get<Quiz[]>( this.vault.apiDomain + '/quiz/fetch-quiz-by-topicid-admin/'+ topic_id);
   }
 
   newQuiz(data, topic_id) {

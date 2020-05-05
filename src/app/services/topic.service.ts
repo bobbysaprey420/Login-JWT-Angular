@@ -12,7 +12,7 @@ export class TopicService {
   constructor(private http: HttpClient, private vault : VaultService) { }
 
   getTopics(subject_id : String): Observable<Topic[]> {
-    return this.http.get<Topic[]>( this.vault.apiDomain + '/topic/fetch-topic-by-subjectid-normal-users/'+ subject_id);
+    return this.http.get<Topic[]>( this.vault.apiDomain + '/topic/fetch-topic-by-subjectid-admin/'+ subject_id);
   }
 
   newTopic(data, subject_id) {
