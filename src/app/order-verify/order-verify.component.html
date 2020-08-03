@@ -1,0 +1,62 @@
+<h2>Order Verification</h2>
+<br/>
+
+<div >
+
+    <h3>Order ID</h3>
+
+    <h3 >{{ id }}</h3>
+    <li>
+    <h4>Address Verification</h4>
+    <button class="btn btn-sm btn-outline-info" (click)="AVerified(orders,id)" style="margin:10px;">Verified</button>
+    <button class="btn btn-sm btn-outline-info" (click)="AnotVerified(orders,id)" style="margin:10px;">Not Verified</button>
+    </li>
+<li>    <h4>Prescription Verification</h4>
+
+    <button *ngIf="verify1" class="btn btn-sm btn-outline-info" (click)="PVerified(orders,id)" style="margin:10px;">Verified</button>
+    <button class="btn btn-sm btn-outline-info" (click)="PnotVerified(orders,id)" style="margin:10px;">Not Verified</button>
+  </li>
+<li>
+    <h4>Bill Complete</h4>
+
+    <button *ngIf="verify2" class="btn btn-sm btn-outline-info" (click)="BVerified(orders,id)" style="margin:10px;">Verified</button>
+    <button class="btn btn-sm btn-outline-info" (click)="BnotVerified(orders,id)" style="margin:10px;">Not Verified</button>
+</li>
+<li>
+    <h4>Order Confirmed</h4>
+
+    <button *ngIf="verify3" class="btn btn-sm btn-outline-info" (click)="OVerified(orders,id)" style="margin:10px;">Verified</button>
+    <button class="btn btn-sm btn-outline-info" (click)="OnotVerified(orders,id)" style="margin:10px;">Not Verified</button>
+</li>
+<li>
+    <h4>Dispatched</h4>
+
+    <button *ngIf="verify4" class="btn btn-sm btn-outline-info" (click)="DVerified(orders,id)" style="margin:10px;">Verified</button>
+    <button class="btn btn-sm btn-outline-info" (click)="DnotVerified(orders,id)" style="margin:10px;">Not Verified</button>
+</li>
+<li>
+    <h4>Shipped</h4>
+
+    <button *ngIf="verify5" class="btn btn-sm btn-outline-info" (click)="SVerified(orders,id)" style="margin:10px;">Verified</button>
+    <button class="btn btn-sm btn-outline-info" (click)="SnotVerified(orders,id)" style="margin:10px;">Not Verified</button>
+</li>
+<li>
+    <h4>Delivered</h4>
+
+    <button *ngIf="verify6" class="btn btn-sm btn-outline-info" (click)="DeVerified(orders,id)" style="margin:10px;">Verified</button>
+    <button class="btn btn-sm btn-outline-info" (click)="DenotVerified(orders,id)" style="margin:10px;">Not Verified</button>
+</li>
+<li>
+    <h4>Completed</h4>
+
+    <button *ngIf="verify7" class="btn btn-sm btn-outline-info" (click)="CVerified(orders,id)" style="margin:10px;">Verified</button>
+    <button class="btn btn-sm btn-outline-info" (click)="CnotVerified(orders,id)" style="margin:10px;">Not Verified</button>
+</li>
+<li>
+    <h4>Cancel Order</h4>
+
+    <button *ngIf="verify8" class="btn btn-sm btn-outline-info" (click)="CaVerified(orders,id)" style="margin:10px;">Verified</button>
+    <button class="btn btn-sm btn-outline-info" (click)="CanotVerified(orders,id)" style="margin:10px;">Not Verified</button>
+</li>
+
+</div>

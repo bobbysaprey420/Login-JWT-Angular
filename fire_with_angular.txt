@@ -1,0 +1,1 @@
+https://angular-templates.io/tutorials/about/angular-crud-with-firebase

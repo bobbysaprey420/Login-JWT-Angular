@@ -1,27 +1,20 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { CourseComponent } from './course/course.component';
-import { SubjectComponent } from './subject/subject.component';
-import { LectureComponent } from './lecture/lecture.component';
-import { NotesComponent } from './notes/notes.component';
-import { TopicComponent } from './topic/topic.component';
-import { QuizComponent } from './quiz/quiz.component';
-import { QuestionComponent } from './question/question.component';
-import { UserquizComponent } from './userquiz/userquiz.component';
-import { UserquizanswerComponent } from './userquizanswer/userquizanswer.component';
-
+import { ProductComponent } from './product/product.component';
+import { DirectOrderComponent } from './direct-order/direct-order.component';
+import { VerificationComponent } from './verification/verification.component';
+import { OrdersComponent } from './orders/orders.component';
+import { OrderVerifyComponent } from './order-verify/order-verify.component';
+import { LoginComponent } from './login/login.component';
+import { AuthGuard } from './services/auth.guard';
 
 const routes: Routes = [
-  { path: 'course', component: CourseComponent },
-  { path : 'course/:id/subject', component: SubjectComponent},
-  { path : 'course/:id/subject/:subject_id/topic', component: TopicComponent},
-  { path : 'course/:id/subject/:subject_id/topic/:topic_id/notes', component: NotesComponent},
-  { path : 'course/:id/subject/:subject_id/topic/:topic_id/lecture', component: LectureComponent},
-  { path : 'course/:id/subject/:subject_id/topic/:topic_id/quiz', component: QuizComponent},
-  { path : 'course/:id/subject/:subject_id/topic/:topic_id/quiz/:quiz_id/questions', component: QuestionComponent},
-  { path : 'course/:id/subject/:subject_id/topic/:topic_id/quiz/:quiz_id/userquiz', component: UserquizComponent},
-  { path : 'course/:id/subject/:subject_id/topic/:topic_id/quiz/:quiz_id/userquiz/:user_id/answers', component: UserquizanswerComponent},
-  
+  { path : 'login', component: LoginComponent},
+  { path: 'medicine', component: ProductComponent,  canActivate: [AuthGuard] },
+  { path: 'direct_order', component: DirectOrderComponent,  canActivate: [AuthGuard] },
+  { path: 'direct_order/:id', component: VerificationComponent,  canActivate: [AuthGuard] },
+  { path: 'orders', component: OrdersComponent,  canActivate: [AuthGuard] },
+  { path: 'orders/:id', component: OrderVerifyComponent,  canActivate: [AuthGuard] }
 ];
 
 @NgModule({

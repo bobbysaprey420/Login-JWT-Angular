@@ -1,0 +1,90 @@
+<button class="add btn btn-outline-success" (click)="showAddProductForm()"><i class="fa fa-plus"></i></button>
+<h4>Product Data</h4>
+<table class="table table-bordered table-striped table-hover">
+    <thead>
+        <tr>
+            <th class="text-center">Medicine ID</th>
+            <th class="text-center">Medicine Name</th>
+            <th class="text-center">COMPOSITION</th>
+            <th class="text-center">HSN_CODE</th>
+            <th class="text-center">GST</th>
+            <th class="text-center">Price</th>
+            <th class="text-center">P_T_R</th>
+            <th class="text-center">P_T_S</th>
+            <th class="text-center">Discount Price</th>
+            <th class="text-center">Type</th>
+            <th class="text-center">Product Description</th>
+
+            <th class="text-center">Action</th>
+        </tr>
+    </thead>
+    <tbody>
+
+        <tr *ngFor="let p of product">
+            <td>{{ p.medicine_id }}</td>
+            <td>{{ p.medicine_name }}</td>
+            <td>{{ p.COMPOSITION }}</td>
+            <td>{{ p.HSN_CODE }}</td>
+            <td>{{ p.GST }}</td>
+            <td>{{ p.price }}</td>
+            <td>{{ p.P_T_R }}</td>
+            <td>{{ p.P_T_S }}</td>
+            <td>{{ p.discount_price }}</td>
+            <td>{{ p.type }}</td>
+            <td>{{ p.product_description }}</td>
+
+
+            <td>
+                <button class="btn btn-outline-info mr-2" (click)="showEditProductForm(p)">
+                    <i class="fa fa-edit"></i>
+                </button>
+                <button class="btn btn-outline-danger" (click)="removeProduct(p)">
+                    <i class="fa fa-minus"></i>
+                </button>
+                <br>
+
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+
+<br />
+
+<form *ngIf="editProduct"   #myform2 = "ngForm" (ngSubmit) = "updateProduct(myform2)">
+    <h2>Edit Product Details</h2>
+    <p>Medicine ID <input type="text" name="medicine_id" ngModel="{{editProduct.medicine_id}}" readonly/></p>
+    <p>Medicine Name <input type="text" name="medicine_name" ngModel="{{editProduct.medicine_name}}" required/></p>
+    <p>COMPOSITION <input type="text" name="COMPOSITION" ngModel="{{editProduct.COMPOSITION}}" /></p>
+    <p>HSN_CODE <input type="text" name="HSN_CODE" ngModel="{{editProduct.HSN_CODE}}" /></p>
+    <p>GST <input type="text" name="GST" ngModel="{{editProduct.GST}}" /></p>
+    <p>Price <input type="text" name="price" ngModel="{{editProduct.price}}" required/></p>
+    <p>P_T_R <input type="text" name="P_T_R" ngModel="{{editProduct.P_T_R}}" /></p>
+    <p>P_T_S <input type="text" name="P_T_S" ngModel="{{editProduct.P_T_S}}" /></p>
+    <p>Discount Price <input type="text" name="discount_price" ngModel="{{editProduct.discount_price}}" /></p>
+    <p>Type <input type="text" name="type" ngModel="{{editProduct.type}}" /></p>
+    <p>Product Description <input type="text" name="product_description" ngModel="{{editProduct.product_description}}" /></p>
+
+    <p>
+        <button type="submit" class="btn btn-outline-primary mr-2">Submit</button>
+        <button type="button" class="btn btn-outline-dark" (click)="cancelEdits()">Cancel</button>
+    </p>
+</form>
+
+<form *ngIf="newProductForm"  #myform = "ngForm" (ngSubmit) = "saveProduct(myform)">
+    <h2>Add New Product</h2>
+    <p>Medicine Name <input type="text" name="medicine_name"  required ngModel/></p>
+    <p>COMPOSITION <input type="text" name="COMPOSITION" ngModel /></p>
+    <p>HSN_CODE <input type="text" name="HSN_CODE" ngModel /></p>
+    <p>GST <input type="text" name="GST" ngModel /></p>
+    <p>Price <input type="text" name="price" required ngModel /></p>
+    <p>P_T_R <input type="text" name="P_T_R" ngModel /></p>
+    <p>P_T_S <input type="text" name="P_T_S" ngModel /></p>
+    <p>Discount Price <input type="text" name="discount_price" ngModel /></p>
+    <p>Type <input type="text" name="type" ngModel /></p>
+    <p>Product Description <input type="text" name="product_description" ngModel /></p>
+
+        <button type="submit" class="btn btn-outline-primary mr-2">Submit</button>
+        <button type="button" class="btn btn-outline-dark" (click)="cancelNewProduct()">Cancel</button>
+
+</form>

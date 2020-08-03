@@ -1,0 +1,44 @@
+
+<h4>Direct Order Data</h4>
+
+<table class="table table-bordered table-striped table-hover">
+    <thead>
+        <tr>
+            <th class="text-center">Order Id</th>
+            <th class="text-center">User Id</th>
+            <th class="text-center">Image file Reference</th>
+            <th class="text-center">Address Id</th>
+            <th class="text-center">Amount</th>
+            <th class="text-center">Bill</th>
+            <th class="text-center">Delivery Date</th>
+            <th class="text-center">Description</th>
+            <th class="text-center">Status Code</th>
+            <th class="text-center">Status Message</th>
+            <th class="text-center">Status Description</th>
+            <th class="text-center">Tracking Id</th>
+
+            <th class="text-center">Verification Tab</th>
+        </tr>
+    </thead>
+    <tbody>
+
+        <tr *ngFor="let d of directOrder">
+            <td>{{ d.order_id }}</td>
+            <td>{{ d.user_id }}</td>
+            <td>{{ d.imagefile_refernce }}</td>
+            <td>{{ d.address_id }}</td>
+            <td>{{ d.amount }}</td>
+            <td>{{ d.bill_pdf }}</td>
+            <td>{{ d.delivery_date }}</td>
+            <td>{{ d.description }}</td>
+            <td>{{ d.status_code }}</td>
+            <td>{{ d.status_message }}</td>
+            <td>{{ d.status_description }}</td>
+            <td>{{ d.tracking_id }}</td>
+            <td>
+
+                <button  class="btn btn-sm btn-outline-info" [routerLink]="['/direct_order', d.order_id]">{{d.order_id}} </button>
+            </td>
+        </tr>
+    </tbody>
+</table>

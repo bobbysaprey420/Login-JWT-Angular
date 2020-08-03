@@ -7,11 +7,30 @@
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav">
       <li class="nav-item">
-        <button class="btn btn-sm btn-outline-info" routerLink="/course">Course Table</button>
+        <button class="btn btn-sm btn-outline-info" routerLink="/medicine">Product Table</button>
       </li>
     </ul>
   </div>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <button class="btn btn-sm btn-outline-info" routerLink="/direct_order">Direct Order Table</button>
+  </div>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <button class="btn btn-sm btn-outline-info" routerLink="/orders">Orders Table</button>
+  </div>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <button class="btn btn-sm btn-outline-info" *ngIf="!auth.loggedIn" routerLink="login">Login</button>
+  </div>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <button class="btn btn-sm btn-outline-info" (click)="logout()" *ngIf="auth.loggedIn" routerLink="/">Logout</button>
+  </div>
+
 </nav>
+
+
 
 <div class="container">
   <h1>Admin Panel</h1>

@@ -1,0 +1,42 @@
+<h4>Orders Data</h4>
+
+<table class="table table-bordered table-striped table-hover">
+    <thead>
+        <tr>
+            <th class="text-center">Order Id</th>
+            <th class="text-center">User Id</th>
+            <th class="text-center">Address Id</th>
+            <th class="text-center">Image file Reference</th>
+            <th class="text-center">Amount</th>
+            <th class="text-center">Bill</th>
+            <th class="text-center">Delivery Date</th>
+            <th class="text-center">Description</th>
+            <th class="text-center">Status Code</th>
+            <th class="text-center">Status Message</th>
+            <th class="text-center">Status Description</th>
+            <th class="text-center">Tracking Id</th>
+
+            <th class="text-center">Verification Tab</th>
+        </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let o of orders">
+          <td>{{ o.order_id }}</td>
+          <td>{{ o.user_id }}</td>
+          <td>{{ o.address_id }}</td>
+          <td>{{ o.imagefile_refernce }}</td>
+          <td>{{ o.amount }}</td>
+          <td>{{ o.bill_pdf }}</td>
+          <td>{{ o.delivery_date }}</td>
+          <td>{{ o.description }}</td>
+          <td>{{ o.status_code }}</td>
+          <td>{{ o.status_message }}</td>
+          <td>{{ o.status_description }}</td>
+          <td>{{ o.tracking_id }}</td>
+          <td>
+
+              <button  class="btn btn-sm btn-outline-info" [routerLink]="['/orders', o.order_id]">{{o.order_id}} </button>
+          </td>
+      </tr>
+      </tbody>
+  </table>
